@@ -85,9 +85,13 @@ class Vector:
     @staticmethod
     def check_scalar(scalar):
         if not (isinstance(scalar, float) or isinstance(scalar, int)):
-            raise TypeError(f"The added object ({scalar}, {type(scalar)} must be a Scalar.")
+            raise TypeError(
+                f"The added object ({scalar}, {type(scalar)} must be a Scalar."
+            )
 
     @staticmethod
     def check_vector(vector):
         if not isinstance(vector, Vector):
-            raise TypeError(f"The added object ({vector}, {type(vector)}) must be a Vector.")
+            raise TypeError(
+                f"The added object ({vector}, {type(vector)}) must be a Vector."
+            )
