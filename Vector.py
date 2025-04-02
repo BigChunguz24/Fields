@@ -35,7 +35,7 @@ class Vector:
 
     def __eq__(self, vector):
         self.check_vector(vector=vector)
-        return (self.x - vector.x) == pytest.approx(0) and (self.y - vector.y) == pytest.approx(0)
+        return math.isclose(self.x, vector.x) and math.isclose(self.y, vector.y)
 
     def __add__(self, vector: "Vector") -> "Vector":
         self.check_vector(vector=vector)
