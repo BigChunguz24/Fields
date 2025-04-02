@@ -62,3 +62,9 @@ def test_vector_r_multiplication(vector, scalar, expected_value):
 @pytest.mark.parametrize("vector, scalar, expected_value", expected_triplets_true_div)
 def test_vector_true_division(vector, scalar, expected_value):
     assert vector / scalar == expected_value
+
+
+@pytest.mark.parametrize("vector", vectors)
+def test_vector_true_division_by_zero(vector):
+    with pytest.raises(ZeroDivisionError):
+        _ = vector / 0
