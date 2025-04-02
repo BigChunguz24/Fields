@@ -1,5 +1,6 @@
 import math
 
+
 class Vector:
     """
     Glossary of available methods:
