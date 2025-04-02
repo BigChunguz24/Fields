@@ -3,6 +3,10 @@ import pytest
 from mock.exp_res_vector_abs_value import expected_pairs_abs
 from mock.exp_res_vector_addition import expected_triplets_add, expected_triplets_radd
 from mock.exp_res_vector_string import expected_pairs_str
+from mock.exp_res_vector_subtraction import (
+    expected_triplets_sub,
+    expected_triplets_rsub,
+)
 from mock.mock_vector import vectors
 
 
@@ -31,3 +35,13 @@ def test_vector_addition(vector_1, vector_2, expected_value):
 @pytest.mark.parametrize("vector_1, vector_2, expected_value", expected_triplets_radd)
 def test_vector_r_addition(vector_1, vector_2, expected_value):
     assert (vector_1 + vector_2) == expected_value
+
+
+@pytest.mark.parametrize("vector_1, vector_2, expected_value", expected_triplets_sub)
+def test_vector_subtraction(vector_1, vector_2, expected_value):
+    assert (vector_1 - vector_2) == expected_value
+
+
+@pytest.mark.parametrize("vector_1, vector_2, expected_value", expected_triplets_rsub)
+def test_vector_r_subtraction(vector_1, vector_2, expected_value):
+    assert (vector_1 - vector_2) == expected_value
