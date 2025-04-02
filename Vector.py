@@ -7,6 +7,7 @@ class Vector:
 
     __repr__ - print debug statements
     __abs__ - return the absolute value of a vector
+    __eq__ - checks if two vectors are equal
     __add__ - addition of a vector with another vector
     __radd__ - addition of a vector with another vector
     __sub__ - subtraction of a vector with another vector
@@ -29,6 +30,10 @@ class Vector:
 
     def __abs__(self):
         return math.hypot(self.x, self.y)
+
+    def __eq__(self, vector):
+        self.check_vector(vector=vector)
+        return (self.x == vector.x) and (self.y == vector.y)
 
     def __add__(self, vector: "Vector") -> "Vector":
         self.check_vector(vector=vector)
