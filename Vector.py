@@ -1,8 +1,5 @@
 import math
 
-import pytest
-
-
 class Vector:
     """
     Glossary of available methods:
