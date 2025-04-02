@@ -1,5 +1,7 @@
 import math
 
+import pytest
+
 
 class Vector:
     """
@@ -33,7 +35,7 @@ class Vector:
 
     def __eq__(self, vector):
         self.check_vector(vector=vector)
-        return (self.x == vector.x) and (self.y == vector.y)
+        return (self.x - vector.x) == pytest.approx(0) and (self.y - vector.y) == pytest.approx(0)
 
     def __add__(self, vector: "Vector") -> "Vector":
         self.check_vector(vector=vector)
@@ -100,3 +102,11 @@ class Vector:
             raise TypeError(
                 f"The added object ({vector}, {type(vector)}) must be a Vector."
             )
+
+
+if __name__ == "__main__":
+    x = Vector(x=0.1, y=0.1)
+    y = Vector(x=0.2, y=0.2)
+    z = Vector(x=0.3, y=0.3)
+
+    print (x+y == z)
