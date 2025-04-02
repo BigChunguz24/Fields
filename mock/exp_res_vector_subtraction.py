@@ -36,4 +36,4 @@ exp_vectors_r_subtraction = [
 ]
 
 expected_triplets_sub = list(zip(vectors, vectors_a, exp_vectors_subtraction))
-expected_triplets_rsub = list(zip(vectors_a, vectors, exp_vectors_r_subtraction))
+expected_triplets_rsub = list(zip(vectors, vectors_a, exp_vectors_r_subtraction))
