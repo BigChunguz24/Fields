@@ -100,11 +100,3 @@ class Vector:
             raise TypeError(
                 f"The added object ({vector}, {type(vector)}) must be a Vector."
             )
-
-
-if __name__ == "__main__":
-    x = Vector(x=0.1, y=0.1)
-    y = Vector(x=0.2, y=0.2)
-    z = Vector(x=0.3, y=0.3)
-
-    print (x+y == z)

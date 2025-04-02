@@ -68,3 +68,7 @@ def test_vector_true_division(vector, scalar, expected_value):
 def test_vector_true_division_by_zero(vector):
     with pytest.raises(ZeroDivisionError):
         _ = vector / 0
+
+
+# TODO: Unit Test for cdot
+# TODO: Unit Test for normalize
