@@ -40,7 +40,7 @@ jobs:
           python -m pytest -v
 
   build:
-    runs-on: [ self-hosted, ubuntu-20.04, aws-runner ]
+    runs-on: ubuntu-20.04
     needs: test
     outputs:
       # Output deploy tag
