@@ -67,7 +67,7 @@ jobs:
 
         # Login to registry to build and push the docker image
         cd ${GITHUB_WORKSPACE}
-        docker login -u ${{ secrets.DOCKER_REPO_USER }} -p ${{ secrets.DOCKER_REPO_PASSWORD }} docker.io
+        docker login -u ${{ secrets.DOCKER_REPO_USER }} -p ${{ secrets.DOCKER_TOKEN }} docker.io
         bash scripts/build_docker.sh "${GA_DOCKER_TAGS}"
 
         # create output for other jobs

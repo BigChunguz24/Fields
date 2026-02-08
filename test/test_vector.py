@@ -23,9 +23,9 @@ def test_vector_absolute_value(vector, expected_value):
 
 
 @pytest.mark.parametrize(
-    "vector_1, vector_2, expected_value", [(vector, vector, True) for vector in vectors]
+    "vector_1, vector_2", [(vector, vector) for vector in vectors]
 )
-def test_vector_equality(vector_1, vector_2, expected_value):
+def test_vector_equality(vector_1, vector_2):
     assert (vector_1 == vector_2) is True
     # TODO: Unit Test for floating point numbers
 

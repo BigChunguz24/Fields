@@ -92,12 +92,22 @@ jobs:
   deploy: ...some actions...
 ```
 
+### Docker Hub access tokens
+To create an image in Docker, we need to access docker using a password replacement
+used for GitHub Actions, GitLab CI, etc. Creating it requires the following steps:
+1) Go to `https://hub.docker.com/` and login;
+2) Go to `Account Settings` and navigate to `Personal Access Tokens`
+3) Generate a new Read/Write token and copy the token immediately (you won't see it
+again)
+4) The copied value goes into `DOCKER_TOKEN` in the `Secrets` of `GitHub Actions`
+
 -----------------------------------------------------------------------------
 ### Secrets:
 This project uses GitHub Actions secrets to authenticate with Docker Hub during
 the CI/CD workflow. The following repository secrets must be configured:
 - `DOCKER_REPO_USER` - Docker Hub username
-- `DOCKER_REPO_PASSWORD` - Docker Hub access token or password
+- `DOCKER_REPO_PASSWORD` - Docker Hub password
+- `DOCKER_TOKEN` - Docker Hub access token
 
 To configure existing secrets or add new ones:
 
@@ -110,3 +120,4 @@ After this has been done, secrets can be referenced via the secrets context
 as follows:
 - `DOCKER_REPO_USER` - secrets.DOCKER_REPO_USER
 - `DOCKER_REPO_PASSWORD` - secrets.DOCKER_REPO_PASSWORD
+- `DOCKER_TOKEN` - secrets.DOCKER_TOKEN
