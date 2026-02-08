@@ -27,6 +27,7 @@ def test_vector_absolute_value(vector, expected_value):
 )
 def test_vector_equality(vector_1, vector_2, expected_value):
     assert (vector_1 == vector_2) is True
+    # TODO: Unit Test for floating point numbers
 
 
 @pytest.mark.parametrize("vector_1, vector_2, expected_value", expected_triplets_add)
@@ -72,3 +73,5 @@ def test_vector_true_division_by_zero(vector):
 
 # TODO: Unit Test for cdot
 # TODO: Unit Test for normalize
+# TODO: Unit Test for check_scalar
+# TODO: Unit Test for check_vector

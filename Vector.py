@@ -15,9 +15,9 @@ class Vector:
     __mul__ - multiplication of a vector with a scalar
     __rmul__ - multiplication of a scalar with a vector
     __truediv__ - division of a vector by a scalar
-    __cdot__ - scalar product between two vectors
+    cdot - scalar product between two vectors
     normalize - normalizes vector to a modulus of unity
-    check_scalar - checks if an object is a floar or an int
+    check_scalar - checks if an object is a float or an int
     check_vector - checks if an object an instance of Vector
     """
 
@@ -32,71 +32,70 @@ class Vector:
         return math.hypot(self.x, self.y)
 
     def __eq__(self, vector):
-        self.check_vector(vector=vector)
+        self._check_vector(vector_candidate=vector)
         return math.isclose(self.x, vector.x) and math.isclose(self.y, vector.y)
 
     def __add__(self, vector: "Vector") -> "Vector":
-        self.check_vector(vector=vector)
+        self._check_vector(vector_candidate=vector)
         x = self.x + vector.x
         y = self.y + vector.y
         return Vector(x, y)
 
     def __radd__(self, vector: "Vector") -> "Vector":
-        self.check_vector(vector=vector)
+        self._check_vector(vector_candidate=vector)
         x = self.x + vector.x
         y = self.y + vector.y
         return Vector(x, y)
 
     def __sub__(self, vector: "Vector") -> "Vector":
-        self.check_vector(vector=vector)
+        self._check_vector(vector_candidate=vector)
         x = self.x - vector.x
         y = self.y - vector.y
         return Vector(x, y)
 
     def __rsub__(self, vector: "Vector") -> "Vector":
-        self.check_vector(vector=vector)
+        self._check_vector(vector_candidate=vector)
         x = vector.x - self.x
         y = vector.y - self.y
         return Vector(x, y)
 
     def __mul__(self, scalar: float) -> "Vector":
-        self.check_scalar(scalar=scalar)
+        self._check_scalar(scalar_candidate=scalar)
         x = scalar * self.x
         y = scalar * self.y
         return Vector(x, y)
 
     def __rmul__(self, scalar: float) -> "Vector":
-        self.check_scalar(scalar=scalar)
+        self._check_scalar(scalar_candidate=scalar)
         x = scalar * self.x
         y = scalar * self.y
         return Vector(x, y)
 
     def __truediv__(self, scalar: float) -> "Vector":
-        self.check_scalar(scalar=scalar)
+        self._check_scalar(scalar_candidate=scalar)
         x = self.x / scalar
         y = self.y / scalar
         return Vector(x, y)
 
     def cdot(self, vector: "Vector") -> float:
-        self.check_vector(vector=vector)
+        self._check_vector(vector_candidate=vector)
         x = self.x * vector.x
         y = self.y * vector.y
         return x + y
 
     def normalize(self) -> "Vector":
-        vector = Vector(x=self.x, y=self.y)
-        return vector / abs(vector)
+        return self / abs(self)
 
     @staticmethod
-    def check_scalar(scalar):
-        if not (isinstance(scalar, float) or isinstance(scalar, int)):
+    def _check_scalar(scalar_candidate):
+        if not (isinstance(scalar_candidate, float) or isinstance(scalar_candidate, int)):
             raise TypeError(
-                f"The added object ({scalar}, {type(scalar)} must be a Scalar."
+                f"The object ({scalar_candidate}, {type(scalar_candidate)} must be a Scalar."
             )
 
     @staticmethod
-    def check_vector(vector):
-        if not isinstance(vector, Vector):
+    def _check_vector(vector_candidate):
+        if not isinstance(vector_candidate, Vector):
             raise TypeError(
-                f"The added object ({vector}, {type(vector)}) must be a Vector."
+                f"The object ({vector_candidate}, {type(vector_candidate)}) must be a Vector."
             )

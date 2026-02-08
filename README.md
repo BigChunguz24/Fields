@@ -10,11 +10,7 @@ library. It also allows to have project-specific dependencies.
 
 1) Create a virtual environment via the following command:
 ```shell
-$ py -m venv venv
-```
-or
-```shell
-$ python -m venv venv
+$ py -m venv venv   //or//   python -m venv venv
 ```
 2) Individual libraries(e.g. black) are then installed via the following command:
 ```shell
