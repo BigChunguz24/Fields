@@ -51,13 +51,13 @@ jobs:
 
     - name: Create docker image
       id: docker_image
-      # Build docker image only on push to master
-      if: (github.event_name == 'push' && github.event.ref == 'refs/heads/master')
+      # Build docker image only on push to main
+      if: (github.event_name == 'push' && github.event.ref == 'refs/heads/main')
       run: |
         export GA_DOCKER_TAGS=latest
         export GA_DEPLOY_TAG=latest
 
-        # If it's push to master, then use the git commit sha as the Docker tag
+        # If it's push to main, then use the git commit sha as the Docker tag
         if [[ ${GITHUB_REF} =~ ^refs/heads/ ]] ; then
           export GA_DEPLOY_TAG="$( echo "sha-${GITHUB_SHA:0:7}" )" ;
           export GA_DOCKER_TAGS="latest ${GA_DEPLOY_TAG}" ;
