@@ -1,0 +1,77 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+
+name: CI/CD Master Branch
+
+on:
+  push:
+    branches:
+      - master
+    schedule:
+      - cron: '0 6 * * *'
+
+jobs:
+  test:
+    runs-on: [ self-hosted, ubuntu-20.04, aws-runner ]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+          cache-dependency-path: |
+            requirements.txt
+            requirements-testrun.txt
+      - run: | 
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-testrun.txt
+
+      - name: Lint with flake8
+        run: |
+          # Stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # Exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+      - name: Run tests with pytest
+        run: |
+          python -m pytest -v
+
+  build:
+    runs-on: [ self-hosted, ubuntu-20.04, aws-runner ]
+    needs: test
+    outputs:
+      # Output deploy tag
+      deploy_tag: ${{ steps.docker_image.outputs.deploy_tag }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Create docker image
+      id: docker_image
+      # Build docker image only on push to master
+      if: (github.event_name == 'push' && github.event.ref == 'refs/heads/master')
+      run: |
+        export GA_DOCKER_TAGS=latest
+        export GA_DEPLOY_TAG=latest
+
+        # If it's push to master, then use the git commit sha as the Docker tag
+        if [[ ${GITHUB_REF} =~ ^refs/heads/ ]] ; then
+          export GA_DEPLOY_TAG="$( echo "sha-${GITHUB_SHA:0:7}" )" ;
+          export GA_DOCKER_TAGS="latest ${GA_DEPLOY_TAG}" ;
+        fi
+        echo "Using tags: ${GA_DOCKER_TAGS}"
+        echo "Deploy tag: ${GA_DEPLOY_TAG}"
+
+        # Login to registry to build and push the docker image
+        cd ${GITHUB_WORKSPACE}
+        docker login -u ${{ secrets.DOCKER_REPO_USER }} -p ${{ secrets.DOCKER_REPO_PASSWORD }} docker.io
+        bash scripts/build_docker.sh "${GA_DOCKER_TAGS}"
+
+        # create output for other jobs
+        echo "deploy_tag=$GA_DEPLOY_TAG" >> $GITHUB_OUTPUT
+
+# TODO: Add Docker
+# TODO: Add Deploy

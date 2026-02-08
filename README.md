@@ -46,8 +46,6 @@ $ black .
 
 
 # TODO: Add in a separate file
-Dependencies:
-- matplotlib
-- scipy
-- pytest
-- black
+Secrets:
+DOCKER_REPO_USER: BigChunguz24
+DOCKER_REPO_PASSWORD: bigdockerydocky227dockydockdockerboi

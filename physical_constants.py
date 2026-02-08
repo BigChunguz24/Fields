@@ -1,5 +1,8 @@
 from scipy import constants
 
+# Used to check zero norms
+eps = 1e-6
+
 # Dielectric permittivity
 varepsilon_0 = constants.epsilon_0
 

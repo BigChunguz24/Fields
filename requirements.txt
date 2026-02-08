@@ -1,0 +1,4 @@
+# This file specifies the dependencies that are needed within this project.
+black==25.1.0
+matplotlib==3.9.4
+scipy==1.13.1
