@@ -1,6 +1,6 @@
 from Vector import Vector
 
-from mock.mock_vector import vectors, vectors_a
+from mock_values.mock_vector import vectors, vectors_a
 
 # Expected values for vector (reverse) subtraction
 

@@ -1,4 +1,4 @@
-from mock.mock_vector import vectors
+from mock_values.mock_vector import vectors
 
 
 # Expected values for string representation
