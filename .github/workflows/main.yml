@@ -11,7 +11,7 @@ on:
 
 jobs:
   test:
-    runs-on: [ self-hosted, ubuntu-20.04, aws-runner ]
+    runs-on: [ ubuntu-20.04, aws-runner ]
     steps:
       - uses: actions/checkout@v4
 
