@@ -1,12 +1,12 @@
 import pytest
 
-from mock.exp_res_vector_true_division import expected_triplets_true_div
-from mock.mock_vector import vectors
-from mock.exp_res_vector_string import expected_pairs_str
-from mock.exp_res_vector_abs_value import expected_pairs_abs
-from mock.exp_res_vector_multiplication import expected_triplets_mul
-from mock.exp_res_vector_addition import expected_triplets_add, expected_triplets_radd
-from mock.exp_res_vector_subtraction import (
+from mock_values.exp_res_vector_true_division import expected_triplets_true_div
+from mock_values.mock_vector import vectors
+from mock_values.exp_res_vector_string import expected_pairs_str
+from mock_values.exp_res_vector_abs_value import expected_pairs_abs
+from mock_values.exp_res_vector_multiplication import expected_triplets_mul
+from mock_values.exp_res_vector_addition import expected_triplets_add, expected_triplets_radd
+from mock_values.exp_res_vector_subtraction import (
     expected_triplets_sub,
     expected_triplets_rsub,
 )
