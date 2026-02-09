@@ -66,7 +66,6 @@ jobs:
         echo "Deploy tag: ${GA_DEPLOY_TAG}"
 
         # Login to registry to build and push the docker image
-        cd ${GITHUB_WORKSPACE}
         echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u ${{ secrets.DOCKER_REPO_USER }} --password-stdin docker.io
         bash scripts/build_docker.sh "${GA_DOCKER_TAGS}"
 
