@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python 3.10
+      - name: Set up Python 3.10 dependencies
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
@@ -67,7 +67,7 @@ jobs:
 
         # Login to registry to build and push the docker image
         cd ${GITHUB_WORKSPACE}
-        docker login -u ${{ secrets.DOCKER_REPO_USER }} -p ${{ secrets.DOCKER_TOKEN }} docker.io
+        echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u ${{ secrets.DOCKER_REPO_USER }} --password-stdin docker.io
         bash scripts/build_docker.sh "${GA_DOCKER_TAGS}"
 
         # create output for other jobs
