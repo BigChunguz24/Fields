@@ -1,57 +1,44 @@
-# Build a clean virtualenv
-FROM docker-hub-repo.amana.vpn/python:3.10-slim AS build
-ENV PATH="/venv/bin:$PATH"
-RUN python3 -m venv /venv && \
-    /venv/bin/pip install --upgrade pip && \
-    /venv/bin/pip install --upgrade gunicorn && \
-    /venv/bin/pip install --upgrade wheel
+# -------- Build a clean virtualenv --------
+FROM python:3.10-slim AS build
 
+ENV VENV_PATH=/venv
+ENV PATH="$VENV_PATH/bin:$PATH"
+
+RUN python -m venv $VENV_PATH && \
+    pip install --upgrade pip wheel gunicorn
 
 # Build the virtualenv when requirements.txt changes
 FROM build AS build-venv
-ENV PATH="/venv/bin:$PATH"
+
 COPY ./requirements.txt /requirements.txt
-
-# Install GCC for XGBoost
-RUN apt update && apt -y install gcc && rm -rf /var/lib/apt/lists/*
-
-RUN /venv/bin/pip install --trusted-host maven.amana.vpn --disable-pip-version-check -r /requirements.txt
+RUN pip install --no-cache-dir -r /requirements.txt
 
 # Copy and run the script
-FROM docker-hub-repo.amana.vpn/python:3.10-slim as run
+FROM python:3.10-slim AS run
+
 ENV PATH="/venv/bin:$PATH"
+
 COPY --from=build-venv /venv /venv
 
-RUN addgroup --gid 12345 python-lab && adduser python-lab --ingroup python-lab --uid 12345 --disabled-password --gecos ''
+# Non-root user
+RUN addgroup --gid 12345 project_fields && \
+    adduser --uid 12345 --gid 12345 --disabled-password --gecos "" project_fields
 
-# Install punkt tokeniser for NLTK
-RUN python -c "import nltk;nltk.download('punkt', download_dir='/usr/share/nltk_data')"
-
-# Install LibGomp for XGBoost
-RUN apt update && apt -y install libgomp1 && rm -rf /var/lib/apt/lists/*
-
-RUN mkdir -p /python-lab
-COPY resources /python-lab/resources
-COPY scripts /python-lab/scripts
-COPY info.properties /python-lab/
-COPY movequant /python-lab/movequant
-RUN chown -R python-lab:python-lab /python-lab
-ENV PYTHONPATH="/python-lab:$PYTHONPATH"
-
-# Add current commit information and date/time to info.properties
+# Add current commit information and date/time to info.properties // Metadata injection //
 ARG VERSION
-RUN echo "writing information to info.properties"
-RUN sed -i "s/\(^build.version=\).*$/\1${VERSION}/" /python-lab/info.properties
-RUN sed -i "s/\(^build.time=\).*$/\1$(date +"%Y-%m-%d %T %Z")/" /python-lab/info.properties
+RUN echo "Writing information to info.properties" && \
+    sed -i "s/\(^build.version=\).*$/\1${VERSION}/" /project_fields/info.properties && \
+    sed -i "s/\(^build.time=\).*$/\1$(date +"%Y-%m-%d %T %Z")/" /project_fields/info.properties
 
 USER 12345
+WORKDIR /project_fields
+ENV PYTHONPATH="/project_fields:$PYTHONPATH"
 EXPOSE 5000
-WORKDIR /python-lab
-ENV PYTHONPATH="/python-lab:$PYTHONPATH"
-CMD /venv/bin/gunicorn --workers $WORKERS \
-  --threads $THREADS \
+
+CMD /venv/bin/gunicorn --workers ${WORKERS:-2} \
+  --threads ${THREADS:-2} \
   --bind 0.0.0.0:5000 \
   --reload \
-  --log-level $LOG_LEVEL \
-  --timeout $TIMEOUT \
+  --log-level ${LOG_LEVEL:-info} \
+  --timeout ${TIMEOUT:-30} \
   movequant.wsgi:app
