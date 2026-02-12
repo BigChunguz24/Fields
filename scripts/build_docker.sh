@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE="ghcr.io/BigChunguz24/Fields"
+IMAGE="ghcr.io/bigchunguz24/fields"
 TAGS=latest
 VERSION=none
 
