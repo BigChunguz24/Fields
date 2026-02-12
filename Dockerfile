@@ -49,4 +49,4 @@ CMD /venv/bin/gunicorn --workers ${WORKERS:-2} \
   --reload \
   --log-level ${LOG_LEVEL:-info} \
   --timeout ${TIMEOUT:-30} \
-  movequant.wsgi:app
+  project_fields.wsgi:app
