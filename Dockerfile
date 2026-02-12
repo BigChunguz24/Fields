@@ -26,12 +26,17 @@ RUN addgroup --gid 12345 project_fields && \
 
 # Add current commit information and date/time to info.properties // Metadata injection //
 ARG VERSION
-RUN echo "BIG DIRECTORY DEBUG"
-RUN echo "Current directory: $(pwd)"
-RUN ls -l /
-RUN echo "Writing information to info.properties" && \
-    sed -i "s/\(^build.version=\).*$/\1${VERSION}/" /project_fields/info.properties && \
-    sed -i "s/\(^build.time=\).*$/\1$(date +"%Y-%m-%d %T %Z")/" /project_fields/info.properties
+RUN mkdir -p /project_fields && \
+    touch /project_fields/info.properties && \
+    # Set build.version
+    grep -q '^build.version=' /project_fields/info.properties \
+        && sed -i "s/^build.version=.*/build.version=${VERSION}/" /project_fields/info.properties \
+        || echo "build.version=${VERSION}" >> /project_fields/info.properties && \
+    # Set build.time
+    grep -q '^build.time=' /project_fields/info.properties \
+        && sed -i "s/^build.time=.*/build.time=$(date +"%Y-%m-%d %T %Z")/" /project_fields/info.properties \
+        || echo "build.time=$(date +"%Y-%m-%d %T %Z")" >> /project_fields/info.properties
+
 
 USER 12345
 WORKDIR /project_fields
