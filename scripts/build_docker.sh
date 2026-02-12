@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE="docker-repo.amana.vpn/quant/quant-webservice"
+IMAGE="ghcr.io/BigChunguz24/Fields"
 TAGS=latest
 VERSION=none
 
