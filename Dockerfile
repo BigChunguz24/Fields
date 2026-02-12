@@ -27,6 +27,7 @@ RUN addgroup --gid 12345 project_fields && \
 # Add current commit information and date/time to info.properties // Metadata injection //
 ARG VERSION
 RUN echo "BIG DIRECTORY DEBUG"
+RUN echo "Current directory: $(pwd)"
 RUN ls -l /
 RUN echo "Writing information to info.properties" && \
     sed -i "s/\(^build.version=\).*$/\1${VERSION}/" /project_fields/info.properties && \
