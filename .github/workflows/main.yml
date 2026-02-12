@@ -65,8 +65,13 @@ jobs:
         echo "Using tags: ${GA_DOCKER_TAGS}"
         echo "Deploy tag: ${GA_DEPLOY_TAG}"
 
-        # Login to registry to build and push the docker image
+        # Login to docker registry
         echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u ${{ secrets.DOCKER_REPO_USER }} --password-stdin docker.io
+        
+        # Login to GitHub
+        echo "${{ secrets.PAT_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        
+        # Build and push image
         bash scripts/build_docker.sh "${GA_DOCKER_TAGS}"
 
         # create output for other jobs
