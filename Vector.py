@@ -88,7 +88,9 @@ class Vector:
 
     @staticmethod
     def _check_scalar(scalar_candidate):
-        if not (isinstance(scalar_candidate, float) or isinstance(scalar_candidate, int)):
+        if not (
+            isinstance(scalar_candidate, float) or isinstance(scalar_candidate, int)
+        ):
             raise TypeError(
                 f"The object ({scalar_candidate}, {type(scalar_candidate)} must be a Scalar."
             )

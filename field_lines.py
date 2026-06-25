@@ -23,10 +23,18 @@ if __name__ == "__main__":
     X, Y = np.meshgrid(x, y)
 
     # Create distance grid and potential grid
-    charge_distance_1 = np.sqrt((X - charge_position_1.x)**2 + (Y - charge_position_1.y)**2)
-    charge_distance_2 = np.sqrt((X - charge_position_2.x)**2 + (Y - charge_position_2.y)**2)
-    charge_distance_3 = np.sqrt((X - charge_position_3.x)**2 + (Y - charge_position_3.y)**2)
-    charge_distance_4 = np.sqrt((X - charge_position_4.x)**2 + (Y - charge_position_4.y)**2)
+    charge_distance_1 = np.sqrt(
+        (X - charge_position_1.x) ** 2 + (Y - charge_position_1.y) ** 2
+    )
+    charge_distance_2 = np.sqrt(
+        (X - charge_position_2.x) ** 2 + (Y - charge_position_2.y) ** 2
+    )
+    charge_distance_3 = np.sqrt(
+        (X - charge_position_3.x) ** 2 + (Y - charge_position_3.y) ** 2
+    )
+    charge_distance_4 = np.sqrt(
+        (X - charge_position_4.x) ** 2 + (Y - charge_position_4.y) ** 2
+    )
     V = np.zeros_like(X)
 
     # Make sure distances are non-zero
@@ -36,11 +44,12 @@ if __name__ == "__main__":
     charge_distance_4[charge_distance_4 < eps] = np.inf
 
     # Add potentials to grid,
-    V += \
-        k * charge_value_1 / charge_distance_1 + \
-        k * charge_value_2 / charge_distance_2 + \
-        k * charge_value_3 / charge_distance_3 + \
-        k * charge_value_4 / charge_distance_4
+    V += (
+        k * charge_value_1 / charge_distance_1
+        + k * charge_value_2 / charge_distance_2
+        + k * charge_value_3 / charge_distance_3
+        + k * charge_value_4 / charge_distance_4
+    )
 
     plt.contour(X, Y, V, levels=1000)
     plt.colorbar(label="Potential")

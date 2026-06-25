@@ -5,7 +5,10 @@ from mock_values.mock_vector import vectors
 from mock_values.exp_res_vector_string import expected_pairs_str
 from mock_values.exp_res_vector_abs_value import expected_pairs_abs
 from mock_values.exp_res_vector_multiplication import expected_triplets_mul
-from mock_values.exp_res_vector_addition import expected_triplets_add, expected_triplets_radd
+from mock_values.exp_res_vector_addition import (
+    expected_triplets_add,
+    expected_triplets_radd,
+)
 from mock_values.exp_res_vector_subtraction import (
     expected_triplets_sub,
     expected_triplets_rsub,
@@ -22,9 +25,7 @@ def test_vector_absolute_value(vector, expected_value):
     assert abs(vector) == expected_value
 
 
-@pytest.mark.parametrize(
-    "vector_1, vector_2", [(vector, vector) for vector in vectors]
-)
+@pytest.mark.parametrize("vector_1, vector_2", [(vector, vector) for vector in vectors])
 def test_vector_equality(vector_1, vector_2):
     assert (vector_1 == vector_2) is True
     # TODO: Unit Test for floating point numbers

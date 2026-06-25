@@ -69,9 +69,11 @@ PAGE = """
 </html>
 """
 
+
 @app.route("/")
 def home():
     return render_template_string(PAGE)
+
 
 @app.route("/contact", methods=["POST"])
 def contact():
@@ -82,6 +84,7 @@ def contact():
     print(f"New message from {name} ({email}): {message}")
 
     return redirect(url_for("home"))
+
 
 if __name__ == "__main__":
     app.run(debug=True)

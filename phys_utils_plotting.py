@@ -3,14 +3,17 @@ import matplotlib.pyplot as plt
 
 from typing import List
 
-def plot_customisation(subplot,
-                       dataframe: pd.DataFrame,
-                       keyword_for_x: str,
-                       keyword_for_y: str,
-                       axis_scaling: str,
-                       coordinate_ticks: List[float],
-                       coordinate_limits: List[float],
-                       axis_label_offset: float,):
+
+def plot_customisation(
+    subplot,
+    dataframe: pd.DataFrame,
+    keyword_for_x: str,
+    keyword_for_y: str,
+    axis_scaling: str,
+    coordinate_ticks: List[float],
+    coordinate_limits: List[float],
+    axis_label_offset: float,
+):
     """
     :param subplot: ax[0], ax[1], ax[2], etc.
     :param dataframe: the dataframe with plot data
@@ -31,7 +34,9 @@ def plot_customisation(subplot,
     :param axis_label_offset: this is the offset of the label from the arrow position
     """
     # Plot x vs y
-    subplot.plot(dataframe[keyword_for_x], dataframe[keyword_for_y], linewidth=1.2, alpha=0.85)
+    subplot.plot(
+        dataframe[keyword_for_x], dataframe[keyword_for_y], linewidth=1.2, alpha=0.85
+    )
 
     # Set the scaling + tick positions
     subplot.set_aspect(axis_scaling)
@@ -61,33 +66,37 @@ def plot_customisation(subplot,
     subplot.set_ylim(ymin, ymax)
 
     # Draw custom x- and y-axes with arrowheads on your plot
-    subplot.annotate("",
-                     xy=(xmax, 0),
-                     xytext=(xmin, 0),
-                     arrowprops=dict(arrowstyle="-|>", mutation_scale=18, color="#222222", lw=1.5),
-                     zorder=4,
-                     )
+    subplot.annotate(
+        "",
+        xy=(xmax, 0),
+        xytext=(xmin, 0),
+        arrowprops=dict(arrowstyle="-|>", mutation_scale=18, color="#222222", lw=1.5),
+        zorder=4,
+    )
 
-    subplot.annotate("",
-                     xy=(0, ymax),
-                     xytext=(0, ymin),
-                     arrowprops=dict(arrowstyle="-|>", mutation_scale=18, color="#222222", lw=1.5),
-                     zorder=4,
-                     )
+    subplot.annotate(
+        "",
+        xy=(0, ymax),
+        xytext=(0, ymin),
+        arrowprops=dict(arrowstyle="-|>", mutation_scale=18, color="#222222", lw=1.5),
+        zorder=4,
+    )
 
     # Add text labels (“x” and “y”) near the ends of your custom axes
-    subplot.annotate("x",
-                     xy=(xmax, 0),
-                     xytext=(xmax - axis_label_offset, - axis_label_offset * 1.2),
-                     fontsize=12,
-                     color="#222222",
-                     fontstyle="italic",
-                     )
+    subplot.annotate(
+        "x",
+        xy=(xmax, 0),
+        xytext=(xmax - axis_label_offset, -axis_label_offset * 1.2),
+        fontsize=12,
+        color="#222222",
+        fontstyle="italic",
+    )
 
-    subplot.annotate("y",
-                     xy=(0, ymax),
-                     xytext=(axis_label_offset * 0.5, ymax - axis_label_offset),
-                     fontsize=12,
-                     color="#222222",
-                     fontstyle="italic",
-                     )
+    subplot.annotate(
+        "y",
+        xy=(0, ymax),
+        xytext=(axis_label_offset * 0.5, ymax - axis_label_offset),
+        fontsize=12,
+        color="#222222",
+        fontstyle="italic",
+    )

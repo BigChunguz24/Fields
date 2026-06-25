@@ -2,7 +2,16 @@ from typing import Callable
 
 import pandas as pd
 
-column_labels = ["t_values", "x_values", "y_values", "vx_values", "vy_values", "ax_values", "ay_values"]
+column_labels = [
+    "t_values",
+    "x_values",
+    "y_values",
+    "vx_values",
+    "vy_values",
+    "ax_values",
+    "ay_values",
+]
+
 
 def perform_euler(
     initial_x: float,
@@ -26,6 +35,5 @@ def perform_euler(
 
         vx += ax * delta_t
         vy += ay * delta_t
-
 
     return pd.DataFrame(rows, columns=column_labels)
