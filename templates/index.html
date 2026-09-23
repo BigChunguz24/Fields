@@ -44,9 +44,32 @@
 
         <section id="problem_sets" class="content-section">
             <h2>Problem Sets</h2>
+
             <p>
-                Contains olympiad-style problem sets.
+                Junior Olympiads:
             </p>
+            <ul>
+                {% for problem_set in problem_sets_junior %}
+                    <li>
+                        <a href="{{ url_for('static', filename='problem_sets_junior/' + problem_set.file) }}">
+                            {{ problem_set.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <p>
+                Senior Olympiads:
+            </p>
+            <ul>
+                {% for problem_set in problem_sets_senior %}
+                <li>
+                    <a href="{{ url_for('static', filename='problem_sets_senior/' + problem_set.file) }}">
+                        {{ problem_set.title }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
         </section>
 
         <section id="useful_links">
