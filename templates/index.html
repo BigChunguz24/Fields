@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Physics Factory</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='body.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='nav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='section.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='classes.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='text.css') }}">
+
 </head>
 
 <body>
@@ -22,35 +29,35 @@
 
     <main>
         <section id="about">
-            <h1>About</h1>
+            <h2>About</h2>
             <p>
                 Welcome to my website.
             </p>
         </section>
 
-        <section id="lecture_notes">
-            <h1>Lecture Notes</h1>
+        <section id="lecture_notes" class="content-section">
+            <h2>Lecture Notes</h2>
             <p>
                 Contains lecture notes and handouts on various topics.
             </p>
         </section>
 
-        <section id="problem_sets">
-            <h1>Problem Sets</h1>
+        <section id="problem_sets" class="content-section">
+            <h2>Problem Sets</h2>
             <p>
                 Contains olympiad-style problem sets.
             </p>
         </section>
 
         <section id="useful_links">
-            <h1>Useful Links</h1>
+            <h2>Useful Links</h2>
             <p>
                 Contains links that are useful.
             </p>
         </section>
 
-        <section id="projects">
-            <h1>Projects</h1>
+        <section id="projects" class="special">
+            <h2>Projects</h2>
             <p>
                 Contains various projects that are being worked on.
             </p>

@@ -1,0 +1,12 @@
+header {
+    background: honeydew;
+
+    margin: 0;
+    padding: 0px;
+
+    border-width: 4px;
+    border-style: solid;
+    border-color: black;
+
+    text-align: center;
+}
