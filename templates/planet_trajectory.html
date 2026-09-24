@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Planet Trajectory</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='body.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='header.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='section.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='text.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>Planet Trajectory — Euler Method</h1>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Simulation Parameters</h2>
+
+            <form method="POST">
+
+                <p>
+                    <label for="x">Initial x:</label>
+                    <input
+                        type="number"
+                        id="x"
+                        name="x"
+                        step="any"
+                        value="0.5"
+                    >
+                </p>
+
+                <p>
+                    <label for="y">Initial y:</label>
+                    <input
+                        type="number"
+                        id="y"
+                        name="y"
+                        step="any"
+                        value="0.0"
+                    >
+                </p>
+
+                <p>
+                    <label for="vx">Initial vx:</label>
+                    <input
+                        type="number"
+                        id="vx"
+                        name="vx"
+                        step="any"
+                        value="0.0"
+                    >
+                </p>
+
+                <p>
+                    <label for="vy">Initial vy:</label>
+                    <input
+                        type="number"
+                        id="vy"
+                        name="vy"
+                        step="any"
+                        value="1.63"
+                    >
+                </p>
+
+                <p>
+                    <label for="delta_t">Time step Δt:</label>
+                    <input
+                        type="number"
+                        id="delta_t"
+                        name="delta_t"
+                        step="any"
+                        value="0.01"
+                    >
+                </p>
+
+                <p>
+                    <label for="iterations">Iterations:</label>
+                    <input
+                        type="number"
+                        id="iterations"
+                        name="iterations"
+                        value="10000"
+                    >
+                </p>
+
+                <button type="submit">
+                    Simulate
+                </button>
+
+            </form>
+
+        </section>
+
+        <section>
+            <h2>Trajectory</h2>
+
+            <img
+                src="{{ url_for('static', filename='planet_trajectory/trajectory.svg') }}"
+                alt="Planet trajectory"
+            >
+
+        </section>
+
+    </main>
+
+</body>
+</html>

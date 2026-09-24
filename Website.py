@@ -1,4 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+from matplotlib import pyplot as plt
+
+from forces import acc_gravity
+from numerical_methods import perform_euler
+from p001_planet_trajectory_euler import plot_trajectory
 
 app = Flask(__name__)
 
@@ -24,6 +29,43 @@ def home():
         problem_sets_senior=problem_sets_senior,
     )
 
+@app.route("/planet-trajectory", methods=["GET", "POST"])
+def planet_trajectory():
+
+    if request.method == "POST":
+
+        x = float(request.form["x"])
+        y = float(request.form["y"])
+        vx = float(request.form["vx"])
+        vy = float(request.form["vy"])
+
+        delta_t = float(request.form["delta_t"])
+        iterations = int(request.form["iterations"])
+
+        df = perform_euler(
+            initial_x=x,
+            initial_y=y,
+            initial_vx=vx,
+            initial_vy=vy,
+            acc_function=acc_gravity,
+            iterations=iterations,
+            delta_t=delta_t,
+        )
+
+        fig, ax = plot_trajectory(
+            df=df,
+            delta_t=delta_t,
+            iterations=iterations,
+        )
+
+        fig.savefig(
+            "static/planet_trajectory/trajectory.svg",
+            format="svg",
+        )
+
+        plt.close(fig)
+
+    return render_template("planet_trajectory.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
