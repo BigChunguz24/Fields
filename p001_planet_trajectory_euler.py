@@ -11,10 +11,8 @@ from phys_utils_plotting import plot_customisation
 def plot_trajectory(df: pd.DataFrame, delta_t: float, iterations: int, coordinate_limits: List[float]=None):
 
     if coordinate_limits is None:
-        lim_left = df["x_values"].min()
-        lim_right = df["x_values"].max()
-        lim_top = df["y_values"].max()
-        lim_bottom = df["y_values"].min()
+        lim_left, lim_right = df["x_values"].min(), df["x_values"].max()
+        lim_bottom, lim_top = df["y_values"].min(), df["y_values"].max()
 
         coordinate_limits = [lim_left, lim_right, lim_bottom, lim_top]
 
