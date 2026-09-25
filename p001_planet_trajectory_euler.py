@@ -1,3 +1,5 @@
+from typing import List
+
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -6,7 +8,16 @@ from numerical_methods import perform_euler
 from matplotlib.animation import FuncAnimation
 from phys_utils_plotting import plot_customisation
 
-def plot_trajectory(df: pd.DataFrame, delta_t: float, iterations: int):
+def plot_trajectory(df: pd.DataFrame, delta_t: float, iterations: int, coordinate_limits: List[float]=None):
+
+    if coordinate_limits is None:
+        lim_left = df["x_values"].min()
+        lim_right = df["x_values"].max()
+        lim_top = df["y_values"].max()
+        lim_bottom = df["y_values"].min()
+
+        coordinate_limits = [lim_left, lim_right, lim_bottom, lim_top]
+
     # Drawing the plot
     fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(10, 6))
     plot_customisation(
@@ -16,7 +27,7 @@ def plot_trajectory(df: pd.DataFrame, delta_t: float, iterations: int):
         keyword_for_y="y_values",
         axis_scaling="equal",
         coordinate_ticks=[0.5, 0.5],
-        coordinate_limits=[-4.2, 1.1, -2.1, 2],
+        coordinate_limits=coordinate_limits,
         axis_label_offset=0.1,
     )
 
@@ -54,6 +65,7 @@ if __name__ == "__main__":
         df=df,
         delta_t=delta_t,
         iterations=iterations,
+        coordinate_limits=[-4.2, 1.1, -2.1, 2],
     )
 
     if animate:
