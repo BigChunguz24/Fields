@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from flask import Flask, render_template, request
 from matplotlib import pyplot as plt
 
@@ -58,10 +60,14 @@ def planet_trajectory():
             iterations=iterations,
         )
 
-        fig.savefig(
-            "static/planet_trajectory/trajectory.svg",
-            format="svg",
+        output_path = (
+            Path(app.root_path)
+            / "static"
+            / "planet_trajectory"
+            / "trajectory.svg"
         )
+
+        fig.savefig(output_path, format="svg")
 
         plt.close(fig)
 
