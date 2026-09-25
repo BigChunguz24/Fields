@@ -9,3 +9,10 @@ section {
     border-color: darkgreen;
     border-radius: 20px;
 }
+
+.about-image {
+    display: block;
+    height: auto;
+    max-width: 100%;
+    margin: 16px auto 0;
+}
