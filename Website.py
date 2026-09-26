@@ -10,18 +10,13 @@ from p001_planet_trajectory_euler import plot_trajectory
 app = Flask(__name__)
 
 problem_sets_junior = [
-    {
-        "title": "Junior Physics Olympiad 17",
-        "file": "junior_17.pdf"
-    },
+    {"title": "Junior Physics Olympiad 17", "file": "junior_17.pdf"},
 ]
 
 problem_sets_senior = [
-{
-        "title": "Senior Physics Olympiad 21",
-        "file": "senior_21.pdf"
-    },
+    {"title": "Senior Physics Olympiad 21", "file": "senior_21.pdf"},
 ]
+
 
 @app.route("/")
 def home():
@@ -30,6 +25,7 @@ def home():
         problem_sets_junior=problem_sets_junior,
         problem_sets_senior=problem_sets_senior,
     )
+
 
 @app.route("/planet-trajectory", methods=["GET", "POST"])
 def planet_trajectory():
@@ -61,10 +57,7 @@ def planet_trajectory():
         )
 
         output_path = (
-            Path(app.root_path)
-            / "static"
-            / "planet_trajectory"
-            / "trajectory.svg"
+            Path(app.root_path) / "static" / "planet_trajectory" / "trajectory.svg"
         )
 
         fig.savefig(output_path, format="svg")
@@ -72,6 +65,7 @@ def planet_trajectory():
         plt.close(fig)
 
     return render_template("planet_trajectory.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
