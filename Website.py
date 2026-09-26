@@ -1,29 +1,25 @@
 from pathlib import Path
-
-from flask import Flask, render_template, request
 from matplotlib import pyplot as plt
+from flask import Flask, render_template, request
 
-from forces import acc_gravity
-from numerical_methods import perform_euler
+from to_refactor.forces import acc_gravity
+from utils.numerical_methods import perform_euler
+from utils.pdf_metadata import extract_pdf_metadata
 from p001_planet_trajectory_euler import plot_trajectory
 
 app = Flask(__name__)
-
-problem_sets_junior = [
-    {"title": "Junior Physics Olympiad 17", "file": "junior_17.pdf"},
-]
-
-problem_sets_senior = [
-    {"title": "Senior Physics Olympiad 21", "file": "senior_21.pdf"},
-]
 
 
 @app.route("/")
 def home():
     return render_template(
         template_name_or_list="index.html",
-        problem_sets_junior=problem_sets_junior,
-        problem_sets_senior=problem_sets_senior,
+        problem_sets_junior=extract_pdf_metadata(
+            Path(app.root_path, "static", "problem_sets_junior")
+        ),
+        problem_sets_senior=extract_pdf_metadata(
+            Path(app.root_path, "static", "problem_sets_senior")
+        ),
     )
 
 

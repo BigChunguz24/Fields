@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Physics Factory</title>
@@ -9,8 +10,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='section.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='footer.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='classes.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='text.css') }}">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='text.css') }}">
 </head>
 
 <body>
@@ -53,9 +53,12 @@
             <ul>
                 {% for problem_set in problem_sets_junior %}
                     <li>
-                        <a href="{{ url_for('static', filename='problem_sets_junior/' + problem_set.file) }}">
+                        <a href="{{ url_for('static', filename='problem_sets_junior/' + problem_set.filename) }}">
                             {{ problem_set.title }}
                         </a>
+                        {% if problem_set.filename %}<br>PDF title: {{ problem_set.filename }}{% endif %}
+                        {% if problem_set.author %}<br>Author: {{ problem_set.author }}{% endif %}
+                        {% if problem_set.last_edit %}<br>Last edit: {{ problem_set.last_edit }}{% endif %}
                     </li>
                 {% endfor %}
             </ul>
@@ -66,9 +69,12 @@
             <ul>
                 {% for problem_set in problem_sets_senior %}
                 <li>
-                    <a href="{{ url_for('static', filename='problem_sets_senior/' + problem_set.file) }}">
+                    <a href="{{ url_for('static', filename='problem_sets_senior/' + problem_set.filename) }}">
                         {{ problem_set.title }}
                     </a>
+                    {% if problem_set.filename %}<br>PDF title: {{ problem_set.filename }}{% endif %}
+                    {% if problem_set.author %}<br>Author: {{ problem_set.author }}{% endif %}
+                    {% if problem_set.last_edit %}<br>Last edit: {{ problem_set.last_edit }}{% endif %}
                 </li>
                 {% endfor %}
             </ul>

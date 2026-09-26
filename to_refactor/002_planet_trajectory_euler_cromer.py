@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 
 from forces import acc_gravity
-from numerical_methods import perform_euler_cromer
+from utils.utils import perform_euler_cromer
 from matplotlib.animation import FuncAnimation
-from phys_utils_plotting import plot_customisation
+from utils.utils import customized_plot
 
 animate = False
 iterations = 50000
@@ -25,7 +25,7 @@ df = perform_euler_cromer(
 
 # Drawing the plot
 fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(10, 6))
-plot_customisation(
+customized_plot(
     subplot=ax,
     dataframe=df,
     keyword_for_x="x_values",

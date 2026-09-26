@@ -1,6 +1,6 @@
 import numpy as np
 
-from physical_constants import uniform_g
+from constants import uniform_g
 
 
 def acc_gravity_uniform(x: float, y: float) -> tuple[float, float]:

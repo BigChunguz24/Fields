@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from typing import List
 
 
-def plot_customisation(
+def customized_plot(
     subplot,
     dataframe: pd.DataFrame,
     keyword_for_x: str,

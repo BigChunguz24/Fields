@@ -1,7 +1,8 @@
-from typing import Callable
-
 import pandas as pd
 
+from typing import Callable
+
+# All numerical methods from this module should return the following column labels:
 column_labels = [
     "t_values",
     "x_values",

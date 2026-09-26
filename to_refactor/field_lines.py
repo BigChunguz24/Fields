@@ -2,7 +2,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 from Vector import Vector
-from physical_constants import k, eps
+from constants import k, eps
 
 if __name__ == "__main__":
     N = 1500

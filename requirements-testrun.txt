@@ -1,5 +1,8 @@
-# This file specifies the dependencies that are needed to test the build. They are not required to
-# run the application
-flake8
+# This file specifies the dependencies that are needed to test the build. They are not required to run the application
+
+# Testing
 pytest
 mock
+
+# Static analysis / linting
+flake8

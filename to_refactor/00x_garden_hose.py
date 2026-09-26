@@ -1,12 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from pandas.core import frame
 
 from forces import acc_gravity_uniform
-from numerical_methods import perform_euler
+from utils.utils import perform_euler
 from matplotlib.animation import FuncAnimation
-from phys_utils_plotting import plot_customisation
+from utils.utils import customized_plot
 
 animate = False
 delta_t = 0.005
@@ -43,7 +42,7 @@ for i in range(0, iterations, 1):
     )
 
     # Plot the full motion of each particle
-    plot_customisation(
+    customized_plot(
         subplot=ax[0],
         dataframe=df,
         keyword_for_x="x_values",
@@ -58,7 +57,7 @@ for i in range(0, iterations, 1):
 
 # Plot just the final trajectory
 df = pd.concat(final_positions, ignore_index=True)
-plot_customisation(
+customized_plot(
     subplot=ax[1],
     dataframe=df,
     keyword_for_x="x_values",

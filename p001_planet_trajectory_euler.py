@@ -4,10 +4,10 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from forces import acc_gravity
-from numerical_methods import perform_euler
+from to_refactor.forces import acc_gravity
+from utils.numerical_methods import perform_euler
 from matplotlib.animation import FuncAnimation
-from phys_utils_plotting import plot_customisation
+from utils.plotting import customized_plot
 
 
 def tick_interval(axis_range: float, target_ticks: int = 10) -> float:
@@ -50,7 +50,7 @@ def plot_trajectory(
 
     # Drawing the plot
     fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(10, 6))
-    plot_customisation(
+    customized_plot(
         subplot=ax,
         dataframe=df,
         keyword_for_x="x_values",
