@@ -1,33 +1,36 @@
 #!/bin/bash
 
-IMAGE="ghcr.io/bigchunguz24/fields"
-TAGS=latest
-VERSION=none
+set -euo pipefail
 
-# Override tags with param1
-if [ ! -z "$1" ] ; then
-    TAGS="$1"
+IMAGE="ghcr.io/bigchunguz24/fields"
+TAGS="${1:-latest}"
+
+# The caller passes tags as a whitespace-separated string, for example: "latest sha-abc1234".
+read -r -a TAG_ARRAY <<< "$TAGS"
+
+if [ "${#TAG_ARRAY[@]}" -eq 0 ]; then
+    echo "No Docker tags were provided." >&2
+    exit 1
 fi
 
-echo "Using tags: ${TAGS}"
+echo "Using tags: ${TAG_ARRAY[*]}"
 
-BUILD_TAGS=""
-for TAG in ${TAGS} ; do
-    BUILD_TAGS="${BUILD_TAGS} --tag ${IMAGE}:${TAG} "
-    docker pull ${IMAGE}:${TAG} 2>/dev/null || true
+VERSION="${TAG_ARRAY[-1]}"
+BUILD_TAGS=()
 
-    # last part of TAGS is commit SHA, if available
-    VERSION=${TAG}
+for TAG in "${TAG_ARRAY[@]}"; do
+    BUILD_TAGS+=(--tag "${IMAGE}:${TAG}")
+
+    # A missing cache image is expected on a first build.
+    docker pull "${IMAGE}:${TAG}" 2>/dev/null || true
 done
 
 docker build \
-    --cache-from ${IMAGE}:build \
-    --cache-from ${IMAGE}:build-venv \
-    --cache-from ${IMAGE}:latest \
-    --build-arg VERSION=${VERSION} \
-    ${BUILD_TAGS} \
+    --cache-from "${IMAGE}:latest" \
+    --build-arg "VERSION=${VERSION}" \
+    "${BUILD_TAGS[@]}" \
     --file Dockerfile .
 
-for TAG in ${TAGS} ; do
-    docker push ${IMAGE}:${TAG}
+for TAG in "${TAG_ARRAY[@]}"; do
+    docker push "${IMAGE}:${TAG}"
 done

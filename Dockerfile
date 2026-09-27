@@ -42,7 +42,7 @@ RUN mkdir -p /fields && \
 
 USER 12345
 WORKDIR /fields
-ENV PYTHONPATH="/fields:$PYTHONPATH"
+ENV PYTHONPATH="/fields"
 EXPOSE 5000
 
 CMD /venv/bin/gunicorn --workers ${WORKERS:-2} \

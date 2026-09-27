@@ -3,7 +3,7 @@ Generates the field lines of irrotational fields and their respective
 equipotential surfaces.
 
 -----------------------------------------------------------------------------
-### Setting up the virtual environment and installing libraries
+## Setting up the virtual environment and installing libraries
 
 A virtual environment is needed to install packages locally rather than globally.
 This is important as different projects may need different versions of the same
@@ -27,7 +27,7 @@ $ pip install -r requirements.txt
 $ pip install -r requirements-testrun.txt
 ```
 -----------------------------------------------------------------------------
-### Using Black
+## Using Black
 
 The Black library is a code formatter for Python, designed to enforce consistent 
 and readable code formatting. It automatically reformats Python code to PEP 8.
@@ -50,7 +50,7 @@ $ black my_file.py
 $ black .
 ```
 -----------------------------------------------------------------------------
-### GitHub Workflows
+## GitHub Workflows
 
 A workflow is a configurable automated process that will trigger one or more jobs 
 which are pre-defined by a YAML file in the repository. A job can be triggered 
@@ -91,8 +91,9 @@ jobs:
   build: ...some actions...
   deploy: ...some actions...
 ```
-
-### Docker Hub access tokens
+-----------------------------------------------------------------------------
+## Docker Hub Access Tokens and Secrets Setup
+### Docker Hub Access Tokens
 To create an image in Docker, we need to access docker using a password replacement
 used for GitHub Actions, GitLab CI, etc. Creating it requires the following steps:
 1) Go to `https://hub.docker.com/` and login;
@@ -101,7 +102,6 @@ used for GitHub Actions, GitLab CI, etc. Creating it requires the following step
 again)
 4) The copied value goes into `DOCKER_TOKEN` in the `Secrets` of `GitHub Actions`
 
------------------------------------------------------------------------------
 ### Secrets:
 This project uses GitHub Actions secrets to authenticate with Docker Hub during
 the CI/CD workflow. The following repository secrets must be configured:
@@ -121,5 +121,15 @@ as follows:
 - `DOCKER_REPO_USER` - secrets.DOCKER_REPO_USER
 - `DOCKER_REPO_PASSWORD` - secrets.DOCKER_REPO_PASSWORD
 - `DOCKER_TOKEN` - secrets.DOCKER_TOKEN
-
-# Test Commit
+-----------------------------------------------------------------------------
+## Running Docker Locally
+1) Go to the directory containing the **Dockerfile**
+2) Run the following command to build the image:
+```
+docker build -t image_name .
+```
+3) Run the following command to run the container:
+```
+docker run --rm -p 5000:5000 image_name
+```
+4) Finally, open ```http://localhost:5000``` in the browser
