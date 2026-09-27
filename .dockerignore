@@ -1,0 +1,11 @@
+.git
+.github
+.idea
+.pytest_cache
+.venv
+__pycache__
+**/__pycache__
+*.py[cod]
+test
+mock_values
+requirements-testrun.txt
