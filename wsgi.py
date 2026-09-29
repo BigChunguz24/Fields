@@ -5,7 +5,7 @@ from flask import Flask, render_template, request
 from to_refactor.forces import acc_gravity
 from utils.numerical_methods import perform_euler
 from utils.pdf_metadata import extract_pdf_metadata
-from p001_planet_trajectory_euler import plot_trajectory
+from utils.plotting import plot_trajectory
 
 app = Flask(__name__)
 
