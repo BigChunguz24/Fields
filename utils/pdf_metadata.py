@@ -2,15 +2,8 @@ import pymupdf
 
 from typing import List
 from pathlib import Path
-from dataclasses import dataclass
 
-
-@dataclass
-class ProblemSet:
-    title: str
-    author: str
-    filename: str
-    last_edit: str
+from classes.dataclasses.ProblemSet import ProblemSet
 
 
 def extract_pdf_metadata(pdf_path: Path) -> List[ProblemSet]:

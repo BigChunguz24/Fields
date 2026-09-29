@@ -2,10 +2,9 @@ from pathlib import Path
 from matplotlib import pyplot as plt
 from flask import Flask, render_template, request
 
+from classes.NumericalMethods import NumericalMethods
 from to_refactor.forces import acc_gravity
-from utils.numerical_methods import perform_euler
 from utils.pdf_metadata import extract_pdf_metadata
-from utils.plotting import plot_trajectory
 
 app = Flask(__name__)
 
@@ -36,21 +35,12 @@ def planet_trajectory():
         delta_t = float(request.form["delta_t"])
         iterations = int(request.form["iterations"])
 
-        df = perform_euler(
-            initial_x=x,
-            initial_y=y,
-            initial_vx=vx,
-            initial_vy=vy,
-            acc_function=acc_gravity,
-            iterations=iterations,
-            delta_t=delta_t,
-        )
+        planet = NumericalMethods(initial_x=x, initial_y=y, initial_vx=vx, initial_vy=vy)
 
-        fig, ax = plot_trajectory(
-            df=df,
-            delta_t=delta_t,
-            iterations=iterations,
-        )
+        fig, ax = planet.plot_trajectory(numerical_method=NumericalMethods.perform_euler,
+                                         acc_function=acc_gravity,
+                                         iterations=iterations,
+                                         delta_t=delta_t)
 
         output_path = (
             Path(app.root_path) / "static" / "planet_trajectory" / "trajectory.svg"
