@@ -1,4 +1,4 @@
-from Vector import Vector
+from classes.Vector import Vector
 
 
 def distance_between_points(point_1: Vector, point_2: Vector):

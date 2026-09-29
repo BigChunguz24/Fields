@@ -1,4 +1,4 @@
-from Vector import Vector
+from classes.Vector import Vector
 
 
 # Vectors for testing

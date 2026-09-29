@@ -1,4 +1,4 @@
-from Vector import Vector
+from classes.Vector import Vector
 from mock_values.mock_vector import vectors, scalars, vector_scalar_pairs
 
 # Expected values for (reverse) scalar multiplication
