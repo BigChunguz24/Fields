@@ -13,11 +13,11 @@ app = Flask(__name__)
 def home():
     return render_template(
         template_name_or_list="index.html",
-        problem_sets_junior=extract_pdf_metadata(
-            Path(app.root_path, "static", "problem_sets_junior")
+        problem_sets_lvl_1=extract_pdf_metadata(
+            Path(app.root_path, "static", "problem_sets_lvl_1")
         ),
-        problem_sets_senior=extract_pdf_metadata(
-            Path(app.root_path, "static", "problem_sets_senior")
+        problem_sets_lvl_2=extract_pdf_metadata(
+            Path(app.root_path, "static", "problem_sets_lvl_2")
         ),
     )
 

@@ -5,14 +5,15 @@
     <meta charset="UTF-8">
     <title>Physics Factory</title>
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='pictures/favicon.svg', v=3) }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='body.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='nav.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='section.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='footer.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='classes.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='text.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='caption.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='000_body.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='001_header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='002_nav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='003_section.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='004_footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='005_classes.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='006_text.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='007_caption.css') }}">
     <script>
         MathJax = {
             tex: {
@@ -84,12 +85,12 @@
             <h2>Problem Sets</h2>
 
             <p>
-                Junior Olympiads:
+                Level 1 Physics Olympiads:
             </p>
             <ul>
-                {% for problem_set in problem_sets_junior %}
+                {% for problem_set in problem_sets_lvl_1 %}
                     <li>
-                        <a href="{{ url_for('static', filename='problem_sets_junior/' + problem_set.filename) }}">
+                        <a href="{{ url_for('static', filename='problem_sets_lvl_1/' + problem_set.filename) }}">
                             {{ problem_set.title }}
                         </a>
                         {% if problem_set.filename %}<br>PDF title: {{ problem_set.filename }}{% endif %}
@@ -100,12 +101,12 @@
             </ul>
 
             <p>
-                Senior Olympiads:
+                Level 2 Physics Olympiads:
             </p>
             <ul>
-                {% for problem_set in problem_sets_senior %}
+                {% for problem_set in problem_sets_lvl_2 %}
                 <li>
-                    <a href="{{ url_for('static', filename='problem_sets_senior/' + problem_set.filename) }}">
+                    <a href="{{ url_for('static', filename='problem_sets_lvl_2/' + problem_set.filename) }}">
                         {{ problem_set.title }}
                     </a>
                     {% if problem_set.filename %}<br>PDF title: {{ problem_set.filename }}{% endif %}
