@@ -29,17 +29,19 @@ class ColumnLabels(str, Enum):
 
 
 class NumericalMethods:
-    def __init__(self, initial_x: float, initial_y: float, initial_vx: float, initial_vy: float):
+    def __init__(
+        self, initial_x: float, initial_y: float, initial_vx: float, initial_vy: float
+    ):
         self.initial_x = initial_x
         self.initial_y = initial_y
         self.initial_vx = initial_vx
         self.initial_vy = initial_vy
 
     def perform_euler(
-            self,
-            acc_function: Callable[[float, float], tuple[float, float]],
-            iterations: int,
-            delta_t: float,
+        self,
+        acc_function: Callable[[float, float], tuple[float, float]],
+        iterations: int,
+        delta_t: float,
     ) -> pd.DataFrame:
         x, y = self.initial_x, self.initial_y
         vx, vy = self.initial_vx, self.initial_vy
@@ -58,10 +60,10 @@ class NumericalMethods:
         return pd.DataFrame(rows, columns=list(ColumnLabels.__members__))
 
     def perform_euler_cromer(
-            self,
-            acc_function: Callable[[float, float], tuple[float, float]],
-            iterations: int,
-            delta_t: float,
+        self,
+        acc_function: Callable[[float, float], tuple[float, float]],
+        iterations: int,
+        delta_t: float,
     ) -> pd.DataFrame:
         x, y = self.initial_x, self.initial_y
         vx, vy = self.initial_vx, self.initial_vy
@@ -80,28 +82,42 @@ class NumericalMethods:
         return pd.DataFrame(rows, columns=list(ColumnLabels.__members__))
 
     def plot_trajectory(
-            self,
-            numerical_method: Callable,
-            acc_function: Callable[[float, float], tuple[float, float]],
-            iterations: int,
-            delta_t: float,
-            coordinate_limits: List[float] = None,
-            coordinate_ticks: List[float] = None,
+        self,
+        numerical_method: Callable,
+        acc_function: Callable[[float, float], tuple[float, float]],
+        iterations: int,
+        delta_t: float,
+        coordinate_limits: List[float] = None,
+        coordinate_ticks: List[float] = None,
     ):
-        df = numerical_method(self,
-                              acc_function=acc_function,
-                              iterations=iterations,
-                              delta_t=delta_t,)
+        df = numerical_method(
+            self,
+            acc_function=acc_function,
+            iterations=iterations,
+            delta_t=delta_t,
+        )
 
         if coordinate_limits is None:
-            lim_left, lim_right = df[ColumnLabels.x_values].min(), df[ColumnLabels.x_values].max()
-            lim_bottom, lim_top = df[ColumnLabels.y_values].min(), df[ColumnLabels.y_values].max()
+            lim_left, lim_right = (
+                df[ColumnLabels.x_values].min(),
+                df[ColumnLabels.x_values].max(),
+            )
+            lim_bottom, lim_top = (
+                df[ColumnLabels.y_values].min(),
+                df[ColumnLabels.y_values].max(),
+            )
 
             coordinate_limits = [lim_left, lim_right, lim_bottom, lim_top]
 
         if coordinate_ticks is None:
-            lim_left, lim_right = df[ColumnLabels.x_values].min(), df[ColumnLabels.x_values].max()
-            lim_bottom, lim_top = df[ColumnLabels.y_values].min(), df[ColumnLabels.y_values].max()
+            lim_left, lim_right = (
+                df[ColumnLabels.x_values].min(),
+                df[ColumnLabels.x_values].max(),
+            )
+            lim_bottom, lim_top = (
+                df[ColumnLabels.y_values].min(),
+                df[ColumnLabels.y_values].max(),
+            )
 
             coordinate_ticks = [
                 self._tick_interval(lim_right - lim_left),
@@ -120,7 +136,11 @@ class NumericalMethods:
         )
 
         ax.set_title(
-            label=self._plot_title(numerical_method=numerical_method, iterations=iterations, delta_t=delta_t),
+            label=self._plot_title(
+                numerical_method=numerical_method,
+                iterations=iterations,
+                delta_t=delta_t,
+            ),
             fontsize=13,
             color="#222222",
             pad=14,
@@ -130,15 +150,14 @@ class NumericalMethods:
 
         return fig, ax
 
-
     @staticmethod
     def _customized_plot(
-            subplot,
-            dataframe: pd.DataFrame,
-            axis_scaling: str,
-            coordinate_ticks: List[float],
-            coordinate_limits: List[float],
-            axis_label_offset: float,
+        subplot,
+        dataframe: pd.DataFrame,
+        axis_scaling: str,
+        coordinate_ticks: List[float],
+        coordinate_limits: List[float],
+        axis_label_offset: float,
     ):
         """
         :param subplot: ax[0], ax[1], ax[2], etc.
@@ -159,7 +178,10 @@ class NumericalMethods:
         """
         # Plot x vs y
         subplot.plot(
-            dataframe[ColumnLabels.x_values], dataframe[ColumnLabels.y_values], linewidth=1.2, alpha=0.85
+            dataframe[ColumnLabels.x_values],
+            dataframe[ColumnLabels.y_values],
+            linewidth=1.2,
+            alpha=0.85,
         )
 
         # Set the scaling + tick positions
@@ -194,7 +216,9 @@ class NumericalMethods:
             "",
             xy=(xmax, 0),
             xytext=(xmin, 0),
-            arrowprops=dict(arrowstyle="-|>", mutation_scale=18, color="#222222", lw=1.5),
+            arrowprops=dict(
+                arrowstyle="-|>", mutation_scale=18, color="#222222", lw=1.5
+            ),
             zorder=4,
         )
 
@@ -202,7 +226,9 @@ class NumericalMethods:
             "",
             xy=(0, ymax),
             xytext=(0, ymin),
-            arrowprops=dict(arrowstyle="-|>", mutation_scale=18, color="#222222", lw=1.5),
+            arrowprops=dict(
+                arrowstyle="-|>", mutation_scale=18, color="#222222", lw=1.5
+            ),
             zorder=4,
         )
 
@@ -240,11 +266,12 @@ class NumericalMethods:
         )
         return float(nice_interval * magnitude)
 
-
     @staticmethod
     def _plot_title(numerical_method: Callable, iterations: int, delta_t: float) -> str:
         if numerical_method is NumericalMethods.perform_euler:
-            return f"Траектория по метод на Ойлер с dt={delta_t} и N={iterations} итерации"
+            return (
+                f"Траектория по метод на Ойлер с dt={delta_t} и N={iterations} итерации"
+            )
         if numerical_method is NumericalMethods.perform_euler_cromer:
             return f"Траектория по метод на Ойлер-Кромер с dt={delta_t} и N={iterations} итерации"
         return ""

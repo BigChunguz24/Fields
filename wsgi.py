@@ -35,12 +35,16 @@ def planet_trajectory():
         delta_t = float(request.form["delta_t"])
         iterations = int(request.form["iterations"])
 
-        planet = NumericalMethods(initial_x=x, initial_y=y, initial_vx=vx, initial_vy=vy)
+        planet = NumericalMethods(
+            initial_x=x, initial_y=y, initial_vx=vx, initial_vy=vy
+        )
 
-        fig, ax = planet.plot_trajectory(numerical_method=NumericalMethods.perform_euler,
-                                         acc_function=acc_gravity,
-                                         iterations=iterations,
-                                         delta_t=delta_t)
+        fig, ax = planet.plot_trajectory(
+            numerical_method=NumericalMethods.perform_euler,
+            acc_function=acc_gravity,
+            iterations=iterations,
+            delta_t=delta_t,
+        )
 
         output_path = (
             Path(app.root_path) / "static" / "planet_trajectory" / "trajectory.svg"
