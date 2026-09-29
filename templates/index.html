@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Physics Factory</title>
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg', v=3) }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='body.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='nav.css') }}">
@@ -11,6 +12,16 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='footer.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='classes.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='text.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='caption.css') }}">
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
 </head>
 
 <body>
@@ -21,6 +32,7 @@
 
     <nav>
         <a href="#about">About</a>
+        <a href="#problem_of_the_week">Problem of the Week</a>
         <a href="#lecture_notes">Lecture Notes</a>
         <a href="#problem_sets">Problem Sets</a>
         <a href="#useful_links">Useful Links</a>
@@ -33,8 +45,32 @@
             <p>
                 Welcome to my website.
             </p>
-            <img class="about-image" src="{{ url_for('static', filename='pictures/electrostatic_cat.jpg') }}"
-                                     alt="An electrostatic cat">
+            <figure>
+                <img class="about-image"
+                     src="{{ url_for('static', filename='pictures/electrostatic_cat.jpg') }}"
+                     alt="A cat with Styrofoam peanuts clinging to its fur">
+                <figcaption>
+                    <a href="https://www.flickr.com/people/52798669@N00">Sean McGrath</a>,
+                    <a href="https://web.archive.org/web/20160127002423/https://www.flickr.com/photos/mcgraths/235112299/">“Cooper and Styrofoam”</a>,
+                    cropped by Black Rainbow 999;
+                    <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>.
+                    <a href="https://commons.wikimedia.org/wiki/File:Cat_demonstrating_static_cling_with_styrofoam_peanuts.jpg">Source and attribution details</a>.
+                </figcaption>
+            </figure>
+        </section>
+
+        <section id="problem_of_the_week">
+            <h2>Problem of the Week</h2>
+            <p>
+                Find all triples of positive integers \((a, b, c)\) such that:
+            </p>
+            <p class="math-display">
+                \[
+                \left(1 + \frac{1}{a}\right)
+                \left(1 + \frac{1}{b}\right)
+                \left(1 + \frac{1}{c}\right) = 2
+                \]
+            </p>
         </section>
 
         <section id="lecture_notes" class="content-section">

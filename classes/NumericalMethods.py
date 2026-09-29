@@ -7,17 +7,6 @@ from typing import Callable, List
 from matplotlib import pyplot as plt
 
 # All numerical methods from this module should return the following column labels:
-column_labels = [
-    "t_values",
-    "x_values",
-    "y_values",
-    "vx_values",
-    "vy_values",
-    "ax_values",
-    "ay_values",
-]
-
-
 class ColumnLabels(str, Enum):
     t_values = "t_values"
     x_values = "x_values"
