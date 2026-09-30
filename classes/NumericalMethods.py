@@ -6,6 +6,7 @@ from typing import Callable, List
 
 from matplotlib import pyplot as plt
 
+
 # All numerical methods from this module should return the following column labels:
 class ColumnLabels(str, Enum):
     t_values = "t_values"

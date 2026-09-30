@@ -13,3 +13,10 @@
     width: 800px;
     margin: 16px auto 0;
 }
+
+.commandments {
+    font-size: 25px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 50px;
+}
