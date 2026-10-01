@@ -1,0 +1,26 @@
+.problem-set-table-container {
+    overflow-x: auto;
+}
+
+.problem-set-table {
+    width: 100%;
+    min-width: 1000px;
+    border-collapse: collapse;
+    background: honeydew;
+}
+
+.problem-set-table th,
+.problem-set-table td {
+    border: 1px solid darkgreen;
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.problem-set-table thead th {
+    background: lightgreen;
+}
+
+.problem-set-table tbody th {
+    font-weight: normal;
+}

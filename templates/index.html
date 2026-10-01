@@ -4,13 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Physics Factory</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='body.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='nav.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='section.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='footer.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='classes.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='text.css') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='pictures/favicon.svg', v=3) }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='000_body.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='001_header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='002_nav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='003_section.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='004_footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='005_classes.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='006_text.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='007_caption.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='008_problem_sets.css') }}">
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
 </head>
 
 <body>
@@ -21,6 +34,7 @@
 
     <nav>
         <a href="#about">About</a>
+        <a href="#problem_of_the_week">Problem of the Week</a>
         <a href="#lecture_notes">Lecture Notes</a>
         <a href="#problem_sets">Problem Sets</a>
         <a href="#useful_links">Useful Links</a>
@@ -31,10 +45,76 @@
         <section id="about">
             <h2>About</h2>
             <p>
-                Welcome to my website.
+                Welcome to my website. On this website, we worship cats. Not in the metaphorical sense. We have chosen
+                cats as our rightful overlords, and we are merely here to serve them. This is Cooper, one of our most
+                sacred feline figures. He was a bit blurry when I first uploaded Him, so I used AI to fill in the
+                missing pixels. The result is what you see here: pixelated Cooper, restored to His former glory.
             </p>
-            <img class="about-image" src="{{ url_for('static', filename='pictures/electrostatic_cat.jpg') }}"
-                                     alt="An electrostatic cat">
+            <p>
+                Please take a moment to admire His magnificence as you pay your respects to Him. Bow before the pixels.
+                Offer Him your snacks. Do not question His infinite wisdom. If Cooper does not approve of your
+                offering, you will know.
+            </p>
+            <p>
+                According to the sacred doctrine of Cooper, everyone is obligated to follow the
+                Ten Commandments - believers and non-believers alike. However, Cooper is a merciful Lord. He accepts
+                that some people may be unaware of His divine authority, and therefore grants them a period of
+                gentle instruction. It is for this reason that we list The Ten Commandments according to the
+                Church of Cooper:
+            </p>
+            <div class="commandments">
+                <ol>
+                    <li>Thou shalt have no other gods before Cooper.</li>
+                    <li>Thou shalt worship Cooper and acknowledge His infinite wisdom.</li>
+                    <li>Thou shalt not take the name of Cooper in vain.</li>
+                    <li>Thou shalt keep the Holy Feeding Hours sacred.</li>
+                    <li>Thou shalt honor thy cat and provide Him with the finest resting places.</li>
+                </ol>
+
+                <ol start="6">
+                    <li>Thou shalt not disturb Cooper while He slumbers.</li>
+                    <li>Thou shalt offer unto Cooper thy snacks, lest He become displeased.</li>
+                    <li>Thou shalt not withhold the sacred belly rubs.</li>
+                    <li>Thou shalt not covet thy neighbor's cat, for Cooper is sufficient.</li>
+                    <li>Thou shalt accept that all things belong to Cooper, and that thou art merely His servant.</li>
+                </ol>
+            </div>
+            <p>
+            For anyone wondering, the original image
+            comes from the
+            <a href="https://en.wikipedia.org/wiki/Electrostatics">Electrostatics</a> Wikipedia page.
+            Wikipedia may call it "Electrostatics". We know the truth.
+            </p>
+            <p>
+                Praise be to our Lord and Savior, Cooper:
+            </p>
+
+            <figure>
+                <img class="about-image"
+                     src="{{ url_for('static', filename='pictures/electrostatic_cat.jpg') }}"
+                     alt="A cat with Styrofoam peanuts clinging to its fur">
+                <figcaption>
+                    <a href="https://www.flickr.com/people/52798669@N00">Sean McGrath</a>,
+                    <a href="https://web.archive.org/web/20160127002423/https://www.flickr.com/photos/mcgraths/235112299/">“Cooper and Styrofoam”</a>,
+                    cropped by Black Rainbow 999;
+                    <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>.
+                    <a href="https://commons.wikimedia.org/wiki/File:Cat_demonstrating_static_cling_with_styrofoam_peanuts.jpg">Source and attribution details</a>.
+                </figcaption>
+            </figure>
+        </section>
+
+        <section id="problem_of_the_week">
+            <h2>Problem of the Week</h2>
+            <p>
+                Find all triples of positive integers \((a, b, c)\) such that:
+            </p>
+            <p class="math-display">
+                \[
+                \left(1 + \frac{1}{a}\right)
+                \left(1 + \frac{1}{b}\right)
+                \left(1 + \frac{1}{c}\right) = 2
+                \]
+            </p>
         </section>
 
         <section id="lecture_notes" class="content-section">
@@ -47,37 +127,67 @@
         <section id="problem_sets" class="content-section">
             <h2>Problem Sets</h2>
 
-            <p>
-                Junior Olympiads:
-            </p>
-            <ul>
-                {% for problem_set in problem_sets_junior %}
-                    <li>
-                        <a href="{{ url_for('static', filename='problem_sets_junior/' + problem_set.filename) }}">
-                            {{ problem_set.title }}
-                        </a>
-                        {% if problem_set.filename %}<br>PDF title: {{ problem_set.filename }}{% endif %}
-                        {% if problem_set.author %}<br>Author: {{ problem_set.author }}{% endif %}
-                        {% if problem_set.last_edit %}<br>Last edit: {{ problem_set.last_edit }}{% endif %}
-                    </li>
-                {% endfor %}
-            </ul>
+            <h3>Level 1 Physics Olympiads</h3>
+            <div class="problem-set-table-container">
+                <table class="problem-set-table" aria-label="Level 1 Physics Olympiads">
+                    <thead>
+                        <tr>
+                            <th scope="col">Olympiad Number</th>
+                            <th scope="col">Problem 1 Solution</th>
+                            <th scope="col">Problem 2 Solution</th>
+                            <th scope="col">Problem 3 Solution</th>
+                            <th scope="col">Problem 4 Solution</th>
+                            <th scope="col">Problem 5 Solution</th>
+                            <th scope="col">Problem 6 Solution</th>
+                            <th scope="col">Last Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for problem_set in problem_sets_lvl_1 %}
+                        <tr>
+                            <th scope="row">
+                                <a href="{{ url_for('static', filename='problem_sets_lvl_1/' + problem_set.filename) }}">
+                                    {{ problem_set.title }}
+                                </a>
+                            </th>
+                            <td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td>{{ problem_set.last_edit.removeprefix('Last Edit ') }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 
-            <p>
-                Senior Olympiads:
-            </p>
-            <ul>
-                {% for problem_set in problem_sets_senior %}
-                <li>
-                    <a href="{{ url_for('static', filename='problem_sets_senior/' + problem_set.filename) }}">
-                        {{ problem_set.title }}
-                    </a>
-                    {% if problem_set.filename %}<br>PDF title: {{ problem_set.filename }}{% endif %}
-                    {% if problem_set.author %}<br>Author: {{ problem_set.author }}{% endif %}
-                    {% if problem_set.last_edit %}<br>Last edit: {{ problem_set.last_edit }}{% endif %}
-                </li>
-                {% endfor %}
-            </ul>
+            <h3>Level 2 Physics Olympiads</h3>
+            <div class="problem-set-table-container">
+                <table class="problem-set-table" aria-label="Level 2 Physics Olympiads">
+                    <thead>
+                        <tr>
+                            <th scope="col">Olympiad Number</th>
+                            <th scope="col">Problem 1 Solution</th>
+                            <th scope="col">Problem 2 Solution</th>
+                            <th scope="col">Problem 3 Solution</th>
+                            <th scope="col">Problem 4 Solution</th>
+                            <th scope="col">Problem 5 Solution</th>
+                            <th scope="col">Problem 6 Solution</th>
+                            <th scope="col">Last Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for problem_set in problem_sets_lvl_2 %}
+                        <tr>
+                            <th scope="row">
+                                <a href="{{ url_for('static', filename='problem_sets_lvl_2/' + problem_set.filename) }}">
+                                    {{ problem_set.title }}
+                                </a>
+                            </th>
+                            <td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td>{{ problem_set.last_edit.removeprefix('Last Edit ') }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </section>
 
         <section id="useful_links">
@@ -93,6 +203,10 @@
                 Contains various projects that are being worked on.
             </p>
 
+            <h3>TikZ Generator</h3>
+            <p>
+                GUI for generating TikZ code.
+            </p>
             <h3>Planet Trajectory - Euler Method</h3>
             <p>
                 Numerical simulation of a planetary trajectory using Euler's method.

@@ -1,0 +1,22 @@
+.special {
+    background: lightgreen;
+}
+
+.content-section {
+    background: lightblue;
+}
+
+.about-image {
+    display: block;
+    height: auto;
+    max-width: 100%;
+    width: 800px;
+    margin: 16px auto 0;
+}
+
+.commandments {
+    font-size: 25px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 50px;
+}
