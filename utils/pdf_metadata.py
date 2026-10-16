@@ -8,7 +8,9 @@ from classes.dataclasses.ProblemSet import ProblemSet
 
 def extract_pdf_metadata(pdf_path: Path) -> List[ProblemSet]:
     problem_set = []
-    for pdf_file in pdf_path.iterdir():
+    for pdf_file in sorted(
+        pdf_path.glob("*.pdf"), key=lambda path: int(path.stem.split("_")[-1])
+    ):
         with pymupdf.open(pdf_file) as document:
             # Extract and format raw data from first page
             first_page_data = [
