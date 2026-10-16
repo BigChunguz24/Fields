@@ -5,7 +5,7 @@ from to_refactor.forces import acc_gravity
 from matplotlib.animation import FuncAnimation
 
 if __name__ == "__main__":
-    animate = True
+    animate = False
     iterations = 10000
     delta_t = 0.010
 
